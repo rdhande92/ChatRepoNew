@@ -12,8 +12,8 @@ load_dotenv()
 GIT_CCESS_TOKEN = os.getenv("GITHUB_TOKEN")
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
-# fetched_formats = ('.cfg', '.ini', '.json', '.md', '.py', '.toml', '.yml', '.yaml')
-fetched_formats = ('.cfg', '.toml')
+fetched_formats = ('.cfg', '.ini', '.json', '.md', '.py', '.toml', '.yml', '.yaml')
+# fetched_formats = ('.cfg', '.toml')
 
 # Split the text into chunks
 text_splitter = RecursiveCharacterTextSplitter(
