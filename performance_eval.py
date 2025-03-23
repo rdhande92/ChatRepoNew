@@ -6,7 +6,7 @@ import warnings
 from datasets import Dataset
 warnings.filterwarnings("ignore", category=FutureWarning)
 
-df = pd.read_csv("output.csv",nrows=5)
+df = pd.read_csv("output.csv",nrows=50)
 
 questions = list(df['question'])
 ground_truth = list(df['answer'])
@@ -26,3 +26,12 @@ score = evaluate(dataset,metrics=[answer_relevancy, answer_correctness])
 score_df = score.to_pandas()
 score_df = score_df[['answer_relevancy','answer_correctness']].mean(axis=0)
 print(score_df)
+
+# Create the DataFrame
+df = pd.DataFrame({
+    'responses': responses,
+    'ground_truth': ground_truth,
+    'questions': questions
+})
+
+df.to_csv("Res.csv")
