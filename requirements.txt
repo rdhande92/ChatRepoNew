@@ -1,0 +1,9 @@
+langchain_community
+dotenv
+langchain
+langchain_openai
+flask
+langchain_chroma
+pandas
+ragas
+Dataset
