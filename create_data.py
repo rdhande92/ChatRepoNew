@@ -11,20 +11,18 @@ from langchain_chroma import Chroma
 load_dotenv()
 GIT_CCESS_TOKEN = os.getenv("GITHUB_TOKEN")
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+persist_directory = "./ChromaDB"
 
 fetched_formats = ('.cfg', '.ini', '.json', '.md', '.py', '.toml', '.yml', '.yaml')
-# fetched_formats = ('.cfg', '.toml')
 
 # Split the text into chunks
 text_splitter = RecursiveCharacterTextSplitter(
-    chunk_size=500,
-    chunk_overlap=100,
-    separators=["\n\n", "\n", " ", ""]
-)
+    chunk_size=500,chunk_overlap=100,
+    separators=["\n\n", "\n", " ", ""])
+
 # Python Splitter
 python_splitter = RecursiveCharacterTextSplitter.from_language(
-    language=Language.PYTHON, chunk_size=1000, chunk_overlap=200
-)
+    language=Language.PYTHON, chunk_size=1000, chunk_overlap=200)
 
 print("All Splitters created...!")
 
@@ -57,7 +55,6 @@ for each_format in fetched_formats:
 # Initialize OpenAI Embedding model
 embedding_model = OpenAIEmbeddings(openai_api_key=OPENAI_API_KEY)
 
-persist_directory = "./ChromaDB"
 
 # Create a Chroma vector store
 vectorstore = Chroma(collection_name="embeddings", embedding_function=embedding_model, 
