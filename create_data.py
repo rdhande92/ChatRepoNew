@@ -6,7 +6,6 @@ from langchain.text_splitter import RecursiveCharacterTextSplitter, Language
 from langchain_openai.embeddings import OpenAIEmbeddings
 from langchain_chroma import Chroma
 
-
 # Load environment variables from .env
 load_dotenv()
 GIT_ACCESS_TOKEN = os.getenv("GITHUB_TOKEN")
@@ -36,7 +35,7 @@ for each_format in fetched_formats:
         branch="main",
         access_token=GIT_ACCESS_TOKEN,
         github_api_url="https://api.github.com",
-        file_filter=lambda file_path: file_path.endswith('.json')
+        file_filter=lambda file_path: file_path.endswith(each_format)
     ).load()
 
     print("Documents loaded from GitHub for format:", each_format)
