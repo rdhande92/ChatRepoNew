@@ -9,7 +9,6 @@ load_dotenv()
 persist_directory = "./ChromaDB"
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
-
 # Reload the Chroma vector store
 embedding_model = OpenAIEmbeddings(openai_api_key=OPENAI_API_KEY)
 vector_store = Chroma(
@@ -22,19 +21,24 @@ def get_response_llm(question):
 
     context = vector_store.similarity_search(question, k=10)  
     
-    prompt = f"""You are a helpful assistant, you have good knowledge in coding and you will use 
-                the provided context to answer user question.
-                Read the given context before answering questions and think step by step. 
-                If you can not answer a user question based on the provided context, inform the user. 
-                Do not use any other information for answering user quesion.
-                Context: {context}
-                User: {question}
-                If you are unable to find the answer in the context, 
-                reply with 'Out-of-scope questions."""
+    prompt = f"""You are a Q&A bot specialized in answering questions about a GitHub repository, which we have vectorized.
+                    You have access to vectorized (indexed) data from the repository.
+                    Your task is to answer user questions using only the information contained in the provided context.
+
+                    Instructions:
+                    1. If the answer is found within the indexed context, provide it clearly and concisely.
+                    2. If you cannot find an answer in the provided context, respond with: "No relevant data in index."
+                    3. Do not use any external information or knowledge beyond the provided context.
+                    Context: {context}
+                    User: {question}"""
 
     # Use LangChain/LLM to obtain a response
-    llm = ChatOpenAI(api_key=OPENAI_API_KEY, temperature=0, model="gpt-3.5-turbo")
+    llm = ChatOpenAI(api_key=OPENAI_API_KEY, temperature=0,
+                     top_p=1,model="gpt-4o")
     response = llm.invoke(prompt)
     return response.content
 
-print(get_response_llm("What are the names of all the Cities in Canada?"))
+# print(get_response_llm("Which campaigns have the lowest CPM?"))
+# print(get_response_llm("For the keywords with the lowest CPM , how many impressions did they have?"))
+# print(get_response_llm("What are the 10 countries with highest government debt in 2020 ?"))
+# print(get_response_llm("What is average Fertility Rate measure of Canada in 2002 ?"))
