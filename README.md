@@ -1,7 +1,8 @@
 **ChatRepoNew**
 
-Repochat is a chatbot that talks about GitHub repositories using a powerful AI model. It helps users ask questions, get information, and have useful conversations about repos. This guide explains how to set up and use Repochat on your computer.
+ChatRepo is a chatbot that talks about GitHub repositories using a powerful LLM model. It helps users ask questions, get information, and have useful conversations about repos. The bot fetches related documents from a database and sends them, along with your input, to the "gpt-4o" model model to generate replies.I used Chroma DB to store and efficiently retrieve relevant documents from a database. Chroma DB is fast, highly scalable, and makes document searches more precise.
 
+**Usage**
 **To get started with Repochat, you'll need to follow these installation steps:**
 
 **Step 1:**
@@ -43,7 +44,9 @@ Open Postman and use the following URL to test the application.
 "response": ""
 }
 
-Note:- To test the application please provide the OPENAI_API_KEY in .env file to access LLM Models.
+**Note:-** To test the application please provide the OPENAI_API_KEY in .env file to access LLM Models.
+
+
 
 
 
