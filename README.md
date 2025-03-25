@@ -43,13 +43,7 @@ Open Postman and use the following URL to test the application.
 "response": ""
 }
 
-
-
-
-
-
-
-
+Note:- To test the application please provide the OPENAI_API_KEY in .env file to access LLM Models.
 
 
 
